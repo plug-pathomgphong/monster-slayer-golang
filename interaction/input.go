@@ -43,3 +43,10 @@ func getPlayerInput() (string, error) {
 
 	return userInput, nil
 }
+
+func ConfirmExitGame() (string, error) {
+	fmt.Print("Press Any Key To Exit.")
+	playerChoice, _ := getPlayerInput()
+
+	return playerChoice, nil
+}

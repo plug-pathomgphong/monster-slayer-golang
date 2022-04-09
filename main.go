@@ -74,4 +74,5 @@ func executeRound() string {
 func endGame(winner string) {
 	interaction.DeclareWinner(winner)
 	interaction.WriteLogFile(&gameRounds, winner)
+	interaction.ConfirmExitGame()
 }
