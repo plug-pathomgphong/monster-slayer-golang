@@ -7,6 +7,8 @@ import (
 
 var currentRound = 0
 var gameRounds = []interaction.RoundData{}
+var countTurnForSpecialAttack = 0
+var isSpecialAttack = false
 
 func main() {
 	startGame()
@@ -25,7 +27,13 @@ func startGame() {
 
 func executeRound() string {
 	currentRound++
-	isSpecialAttack := currentRound%3 == 0
+
+	countTurnForSpecialAttack++
+	if countTurnForSpecialAttack >= 3 {
+		isSpecialAttack = true
+	}
+
+	// isSpecialAttack := currentRound%3 == 0
 	interaction.ShowAvailableActions(isSpecialAttack)          // Show choice
 	userChoice := interaction.GetPlayerChoice(isSpecialAttack) // User choose choice from input
 
@@ -41,6 +49,8 @@ func executeRound() string {
 		playerHealValue = actions.HealPlayer()
 	} else {
 		playerAttackDmg = actions.AttackMonster(true)
+		countTurnForSpecialAttack = 0
+		isSpecialAttack = false
 	}
 
 	monsterAttacDmg = actions.AttackPlayer()
